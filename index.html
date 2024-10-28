@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lua Converter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      textarea {
+        width: 50%;
+        height: 100px;
+        margin-bottom: 10px;
+      }
+      button {
+        margin-top: 5px;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>One-line Converter</h1>
+    <p>
+      Couldn't find one on the first page of Google, then got lazy and made my
+      own.
+    </p>
+
+    <h2>Multiline to One Line</h2>
+    <textarea
+      id="multilineInput"
+      placeholder="put code h8re..."
+      oninput="convertToOneLine()"
+    ></textarea>
+    <button onclick="setClipboard('multilineInput')">Copy Multiline</button>
+    <p><strong>One Line Output:</strong></p>
+    <textarea id="oneLineOutput" readonly></textarea>
+    <button onclick="setClipboard('oneLineOutput')">Copy One Line</button>
+
+    <script>
+      function convertToOneLine() {
+        const multilineInput = document.getElementById("multilineInput").value;
+        const oneLineOutput = multilineInput
+          .replace(/\s*\n\s*/g, " ")
+          .trim()
+          .replace(/\s+/g, " ");
+        document.getElementById("oneLineOutput").value = oneLineOutput;
+      }
+
+      function setClipboard(id) {
+        const textarea = document.getElementById(id);
+        textarea.select();
+        document.execCommand("copy");
+        console.log(`copped text`);
+      }
+    </script>
+  </body>
+</html>
